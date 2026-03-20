@@ -15,59 +15,74 @@ admin.get('/login', (c) => {
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet"/>
-  <style>* { font-family: 'Noto Sans KR', sans-serif; }</style>
+  <style>
+    * { font-family: 'Noto Sans KR', sans-serif; }
+    input:focus { outline:none; border-color:#D7191F !important; box-shadow:0 0 0 3px rgba(215,25,31,0.10); }
+  </style>
 </head>
-<body class="min-h-screen flex items-center justify-center" style="background:linear-gradient(135deg,#1a0000 0%,#5a0101 40%,#8B0304 80%,#D7191F 100%)">
-  <div class="w-full max-w-md mx-4">
+<body class="min-h-screen flex items-center justify-center"
+  style="background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#0F2744 100%)">
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5"
+      style="background:radial-gradient(circle,#D7191F,transparent);transform:translate(30%,-30%)"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-5"
+      style="background:radial-gradient(circle,#896E4A,transparent);transform:translate(-30%,30%)"></div>
+  </div>
+  <div class="w-full max-w-md mx-4 relative z-10">
     <div class="text-center mb-8">
-      <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
+        style="background:linear-gradient(135deg,#8B0304,#D7191F)">
         <i class="fas fa-laptop-code text-white text-2xl"></i>
       </div>
-      <h1 class="text-white font-black text-2xl">BNK CMS</h1>
-      <p class="text-sm mt-1" style="color:rgba(255,220,180,0.9)">콘텐츠 관리 시스템</p>
+      <h1 class="font-black text-2xl text-white">BNK CMS</h1>
+      <p class="text-sm mt-1" style="color:rgba(148,163,184,0.9)">콘텐츠 관리 시스템</p>
     </div>
-    <div class="bg-white rounded-3xl shadow-2xl p-8">
-      <!-- BNK Red 상단 강조선 -->
-      <div class="h-1 rounded-full mb-6" style="background:linear-gradient(90deg,#8B0304,#D7191F,#896E4A)"></div>
-      <h2 class="text-xl font-black mb-6 text-center" style="color:#65584F">관리자 로그인</h2>
-      ${error ? `<div class="rounded-xl px-4 py-3 text-sm mb-5 flex items-center gap-2" style="background:#FFF0F0;border:1px solid #FFCDD2;color:#8B0304">
-        <i class="fas fa-exclamation-circle"></i> 아이디 또는 비밀번호가 올바르지 않습니다.
+    <div class="bg-white rounded-2xl shadow-2xl p-8">
+      <div class="h-1 rounded-full mb-6" style="background:linear-gradient(90deg,#0F172A,#D7191F 50%,#896E4A)"></div>
+      <h2 class="text-xl font-black mb-6 text-center" style="color:#1E293B">관리자 로그인</h2>
+      ${error ? `<div class="rounded-xl px-4 py-3 text-sm mb-5 flex items-center gap-2"
+        style="background:#FEF2F2;border:1px solid #FECACA;color:#8B0304">
+        <i class="fas fa-exclamation-circle flex-shrink-0"></i>
+        아이디 또는 비밀번호가 올바르지 않습니다.
       </div>` : ''}
       <form action="/admin/login" method="POST" class="space-y-4">
         <div>
-          <label class="block text-sm font-semibold mb-1.5" style="color:#65584F">아이디</label>
+          <label class="block text-sm font-semibold mb-1.5" style="color:#334155">아이디</label>
           <div class="relative">
-            <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2" style="color:#B7A997"></i>
+            <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:#94A3B8"></i>
             <input type="text" name="username" placeholder="admin" required
-              class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm"
-              style="focus:border-color:#D7191F"/>
+              class="w-full pl-11 pr-4 py-3 border rounded-xl text-sm transition-all"
+              style="border-color:#E2E8F0;color:#1E293B"/>
           </div>
         </div>
         <div>
-          <label class="block text-sm font-semibold mb-1.5" style="color:#65584F">비밀번호</label>
+          <label class="block text-sm font-semibold mb-1.5" style="color:#334155">비밀번호</label>
           <div class="relative">
-            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2" style="color:#B7A997"></i>
+            <i class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:#94A3B8"></i>
             <input type="password" name="password" placeholder="••••••••" required
-              class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-sm"/>
+              class="w-full pl-11 pr-4 py-3 border rounded-xl text-sm transition-all"
+              style="border-color:#E2E8F0;color:#1E293B"/>
           </div>
         </div>
         <button type="submit"
-          class="w-full py-3.5 rounded-xl font-bold text-white text-sm mt-2 transition-all hover:opacity-90"
-          style="background:linear-gradient(135deg,#8B0304,#D7191F)">
+          class="w-full py-3.5 rounded-xl font-bold text-white text-sm mt-2 transition-all"
+          style="background:#D7191F"
+          onmouseover="this.style.background='#8B0304'"
+          onmouseout="this.style.background='#D7191F'">
           <i class="fas fa-sign-in-alt mr-2"></i>로그인
         </button>
       </form>
-      <div class="mt-6 p-4 rounded-xl text-xs" style="background:#FFF8EF;color:#896E4A">
-        <i class="fas fa-info-circle mr-1"></i>
-        기본 계정: <strong>admin</strong> / <strong>bnk2024!</strong>
+      <div class="mt-5 p-3.5 rounded-xl flex items-start gap-2.5 text-xs"
+        style="background:#F8FAFC;border:1px solid #E2E8F0;color:#475569">
+        <i class="fas fa-info-circle mt-0.5 flex-shrink-0" style="color:#896E4A"></i>
+        <span>기본 계정: <strong style="color:#1E293B">admin</strong> / <strong style="color:#1E293B">bnk2024!</strong></span>
       </div>
     </div>
-    <p class="text-center text-xs mt-6" style="color:rgba(255,200,160,0.7)">© 2024 BNK부산은행 재능기부봉사단 디지털IT팀</p>
+    <p class="text-center text-xs mt-6" style="color:rgba(148,163,184,0.6)">© 2024 BNK부산은행 재능기부봉사단 디지털IT팀</p>
   </div>
 </body>
 </html>`)
 })
-
 admin.get('/logout', (c) => {
   c.header('Set-Cookie', 'admin_token=; Path=/; Max-Age=0')
   return c.redirect('/admin/login')
@@ -117,7 +132,7 @@ admin.get('/', async (c) => {
     <!-- 봉사 집계 -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <div class="rounded-2xl p-6 text-white flex items-center gap-4"
-        style="background:linear-gradient(135deg,#8B0304,#C01218)">
+        style="background:linear-gradient(135deg,#1E293B,#334155)">
         <div class="w-14 h-14 bg-white bg-opacity-20 rounded-xl flex items-center justify-center">
           <i class="fas fa-heart text-2xl" style="color:var(--bnk-gold)"></i>
         </div>
@@ -184,13 +199,13 @@ admin.get('/', async (c) => {
     <div class="mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
       <h2 class="font-black text-gray-800 mb-4">빠른 추가</h2>
       <div class="flex flex-wrap gap-3">
-        <a href="/admin/activities/new" class="flex items-center gap-2 btn-bnk px-5 py-2.5 rounded-xl text-sm font-semibold">
+        <a href="/admin/activities/new" class="flex items-center gap-2 btn-admin-primary px-5 py-2.5 rounded-xl text-sm font-semibold">
           <i class="fas fa-plus"></i> 활동 추가
         </a>
         <a href="/admin/posts/new" class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white" style="background:var(--bnk-dark-gray)">
           <i class="fas fa-plus"></i> 블로그 작성
         </a>
-        <a href="/admin/members/new" class="flex items-center gap-2 btn-bnk-gold px-5 py-2.5 rounded-xl text-sm font-semibold">
+        <a href="/admin/members/new" class="flex items-center gap-2 btn-admin-gold px-5 py-2.5 rounded-xl text-sm font-semibold">
           <i class="fas fa-plus"></i> 팀원 추가
         </a>
         <a href="/admin/gallery/new" class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white" style="background:#909394">
@@ -217,7 +232,7 @@ admin.get('/activities', async (c) => {
     <div class="flex justify-between items-center mb-6">
       <p class="text-gray-500 text-sm">${rows.results.length}개의 활동 내역</p>
       <a href="/admin/activities/new"
-        class="flex items-center gap-2 btn-bnk px-5 py-2.5 rounded-xl text-sm font-bold">
+        class="flex items-center gap-2 btn-admin-primary px-5 py-2.5 rounded-xl text-sm font-bold">
         <i class="fas fa-plus"></i> 새 활동 추가
       </a>
     </div>
@@ -326,7 +341,7 @@ function activityForm(action: string, method: string = 'POST', values: any = {})
             <label for="pub" class="text-sm text-gray-700 font-medium">공개 여부</label>
           </div>
           <div class="flex gap-3 pt-2">
-            <button type="submit" class="btn-bnk px-8 py-2.5 rounded-xl text-sm font-bold">
+            <button type="submit" class="btn-admin-primary px-8 py-2.5 rounded-xl text-sm font-bold">
               <i class="fas fa-save mr-2"></i>저장
             </button>
             <a href="/admin/activities" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-medium transition-colors">취소</a>
@@ -352,7 +367,7 @@ admin.get('/posts', async (c) => {
     <div class="flex justify-between items-center mb-6">
       <p class="text-gray-500 text-sm">${rows.results.length}개의 포스트</p>
       <a href="/admin/posts/new"
-        class="flex items-center gap-2 btn-bnk px-5 py-2.5 rounded-xl text-sm font-bold">
+        class="flex items-center gap-2 btn-admin-primary px-5 py-2.5 rounded-xl text-sm font-bold">
         <i class="fas fa-plus"></i> 새 포스트 작성
       </a>
     </div>
@@ -449,7 +464,7 @@ function postForm(action: string, method: string, values: any = {}): string {
             <label for="pub" class="text-sm text-gray-700 font-medium">공개 여부</label>
           </div>
           <div class="flex gap-3 pt-2">
-            <button type="submit" class="btn-bnk px-8 py-2.5 rounded-xl text-sm font-bold">
+            <button type="submit" class="btn-admin-primary px-8 py-2.5 rounded-xl text-sm font-bold">
               <i class="fas fa-save mr-2"></i>저장
             </button>
             <a href="/admin/posts" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-medium transition-colors">취소</a>
@@ -475,7 +490,7 @@ admin.get('/members', async (c) => {
     <div class="flex justify-between items-center mb-6">
       <p class="text-gray-500 text-sm">${rows.results.length}명의 팀원</p>
       <a href="/admin/members/new"
-        class="flex items-center gap-2 btn-bnk-gold px-5 py-2.5 rounded-xl text-sm font-bold">
+        class="flex items-center gap-2 btn-admin-gold px-5 py-2.5 rounded-xl text-sm font-bold">
         <i class="fas fa-plus"></i> 팀원 추가
       </a>
     </div>
@@ -596,7 +611,7 @@ function memberForm(action: string, method: string, values: any = {}): string {
             </div>
           </div>
           <div class="flex gap-3 pt-2">
-            <button type="submit" class="btn-bnk-gold px-8 py-2.5 rounded-xl text-sm font-bold">
+            <button type="submit" class="btn-admin-gold px-8 py-2.5 rounded-xl text-sm font-bold">
               <i class="fas fa-save mr-2"></i>저장
             </button>
             <a href="/admin/members" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-medium transition-colors">취소</a>
@@ -622,7 +637,7 @@ admin.get('/gallery', async (c) => {
     <div class="flex justify-between items-center mb-6">
       <p class="text-gray-500 text-sm">${rows.results.length}개의 갤러리 항목</p>
       <a href="/admin/gallery/new"
-        class="flex items-center gap-2 btn-bnk px-5 py-2.5 rounded-xl text-sm font-bold">
+        class="flex items-center gap-2 btn-admin-primary px-5 py-2.5 rounded-xl text-sm font-bold">
         <i class="fas fa-plus"></i> 항목 추가
       </a>
     </div>
@@ -704,7 +719,7 @@ function galleryForm(action: string, method: string, values: any = {}): string {
             <label for="pub" class="text-sm text-gray-700 font-medium">공개 여부</label>
           </div>
           <div class="flex gap-3 pt-2">
-            <button type="submit" class="btn-bnk px-8 py-2.5 rounded-xl text-sm font-bold">
+            <button type="submit" class="btn-admin-primary px-8 py-2.5 rounded-xl text-sm font-bold">
               <i class="fas fa-save mr-2"></i>저장
             </button>
             <a href="/admin/gallery" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-medium transition-colors">취소</a>
